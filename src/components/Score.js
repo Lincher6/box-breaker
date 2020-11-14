@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components/macro";
+import {useContextState} from "../context/Context";
 
 const Container = styled.div`
   padding: 5px 15px;
@@ -9,12 +10,15 @@ const Container = styled.div`
   text-align: center;
   font-family: DigitalClock;
   font-size: 32px;
+  min-width: 200px;
 `
 
 export const Score = () => {
+    const { score } = useContextState()
+
     return (
         <Container>
-            Score: 000
+            Score: {score}
         </Container>
     )
 }

@@ -14,8 +14,8 @@ export const theme = createMuiTheme({
         MuiButton: {
             root: {
                 fontWeight: `bold`,
-                margin: `10px`
-            }
+                margin: `10px`,
+            },
         }
     }
 
