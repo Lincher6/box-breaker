@@ -1,4 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
+  background-color: #0e1621;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +17,31 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+}
+
+.app:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .05;
+  z-index: -1;
+  background: url('./assets/background.jpg');
+  background-size: cover;
+  background-repeat: round;
+}
+
+@font-face {
+  font-family: 'DigitalClock';
+  src: local('DigitalClock'), url('fonts/digital-7.ttf');
 }

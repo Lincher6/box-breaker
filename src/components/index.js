@@ -1,0 +1,6 @@
+export { GameUI } from './GameUI'
+export { Title } from './Title'
+export { GameField } from './GameField'
+export { ResultsTable } from './ResultsTable'
+export { Timer } from './Timer'
+export { Score } from './Score'

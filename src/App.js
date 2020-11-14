@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Grid from "@material-ui/core/Grid";
+import {GameField, GameUI, ResultsTable, Title} from "./components";
+import {Header} from "./containers/Header";
+import {Body} from "./containers/Body";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="app">
+            <Header>
+                <GameUI/>
+                <Title/>
+            </Header>
+            <Body>
+                <GameField/>
+                <ResultsTable/>
+            </Body>
+        </div>
+    );
 }
 
 export default App;
