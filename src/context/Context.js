@@ -7,7 +7,8 @@ export const ContextProvider = ({ children }) => {
     const [ state, setState ] = useState({
         score: 0,
         boxes: [],
-        isStarted: false
+        isStarted: false,
+        isPaused: false,
     })
     const actions = {
         addScore: amount => {
@@ -33,9 +34,15 @@ export const ContextProvider = ({ children }) => {
                 ...state,
                 score: 0,
                 boxes: [],
-                isStarted: true
+                isStarted: true,
             })
-        }
+        },
+        pauseGame: () => {
+            setState(prevState => ({
+                ...prevState,
+                isPaused: !prevState.isPaused
+            }))
+        },
     }
 
     return (

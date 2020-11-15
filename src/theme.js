@@ -8,6 +8,10 @@ export const theme = createMuiTheme({
         secondary: {
             main: '#ff6000',
         },
+        action: {
+            disabledBackground: 'rgba(100, 100, 100, .5)',
+            disabled: 'white'
+        }
     },
 
     overrides: {
@@ -15,6 +19,9 @@ export const theme = createMuiTheme({
             root: {
                 fontWeight: `bold`,
                 margin: `10px`,
+                fontFamily: `DigitalClock`,
+                fontSize: 24,
+                minWidth: 120
             },
         }
     }

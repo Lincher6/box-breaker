@@ -4,6 +4,7 @@ import {Box} from "./Box";
 import {BOX_SIZE} from "../constants";
 import {getIdGenerator} from "../utils";
 import {useContextActions, useContextState} from "../context/Context";
+import {useFlashes} from "./Flash";
 
 const Container = styled.div`
   position: relative;
@@ -16,16 +17,24 @@ const Container = styled.div`
   cursor: crosshair;
   overflow: hidden;
 `
-
 const nextId = getIdGenerator()
 
 export const GameField = () => {
-    const { boxes } = useContextState()
+    const { boxes, isPaused, isStarted } = useContextState()
     const { addScore, addBox, removeBox } = useContextActions()
+    const { flashes, addFlash } = useFlashes()
 
     const fieldRef = useRef(null)
     const height = useRef(0)
     const width = useRef(0)
+    const timer = useRef()
+
+    const handleShot = event => {
+        const rect = event.target.getBoundingClientRect()
+        const top = event.clientY - rect.top
+        const left = event.clientX - rect.left
+        addFlash(top, left)
+    }
 
     const handleHitBox = (id) => {
         addScore(1)
@@ -46,14 +55,26 @@ export const GameField = () => {
         const rect = field.getBoundingClientRect()
         height.current = rect.bottom - rect.top
         width.current = rect.right - rect.left
-
-        setInterval(() => {
-            createBoxes(1)
-        }, 1000)
     }, [])
 
+    useEffect(() => {
+        if (isStarted) {
+            const fieldStyle = fieldRef.current.style
+            if (isPaused) {
+                clearTimeout(timer.current)
+                fieldStyle.pointerEvents = `none`
+            } else {
+                timer.current = setInterval(() => {
+                    createBoxes(1)
+                }, 1000)
+                fieldStyle.pointerEvents = `auto`
+            }
+        }
+    }, [isPaused, isStarted])
+
     return (
-        <Container ref={fieldRef}>
+        <Container ref={fieldRef} onClick={handleShot}>
+            {flashes}
             {boxes.map(box => {
                 return (
                     <Box

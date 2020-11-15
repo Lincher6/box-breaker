@@ -13,8 +13,12 @@ const Container = styled.div`
 `
 
 export const GameUI = () => {
-    const { isStarted } = useContextState()
-    const { startGame } = useContextActions()
+    const { isStarted, isPaused } = useContextState()
+    const { startGame, pauseGame } = useContextActions()
+
+    const handlePause = () => {
+        pauseGame()
+    }
 
     return (
         <Container>
@@ -22,9 +26,10 @@ export const GameUI = () => {
                 <Button
                     variant="contained"
                     color="secondary"
+                    onClick={handlePause}
                     disabled={!isStarted}
                 >
-                    {isStarted ? "PAUSE" : "START"}
+                    {isPaused ? "RESUME" : "PAUSE"}
                 </Button>
                 <Button
                     variant="contained"
