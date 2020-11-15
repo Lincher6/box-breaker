@@ -35,6 +35,7 @@ export const ContextProvider = ({ children }) => {
                 score: 0,
                 boxes: [],
                 isStarted: true,
+                isPaused: false
             })
         },
         pauseGame: () => {

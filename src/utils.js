@@ -7,3 +7,15 @@ export const getIdGenerator = (prefix = "id-") => {
         return `${prefix}${id++}`
     }
 }
+
+export const debounce = (fn, delay) => {
+    let timer
+
+    return (...args) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            console.log('here')
+            fn(...args)
+        }, delay)
+    }
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
+import boxImg from '../assets/box.png'
 
 const Container = styled.div`
   position: absolute;
@@ -7,7 +8,9 @@ const Container = styled.div`
   height: 25px;
   top: ${({ top }) => top + 'px'};
   left: ${({ left }) => left + 'px'};
-  background: white;
+  background: url(${boxImg});
+  filter: hue-rotate(${() => Math.floor(Math.random() * 360) + 'deg' });
+  background-size: contain;
   animation: popUp .5s;
   
   @keyframes popUp {
@@ -17,13 +20,10 @@ const Container = styled.div`
   }
 `
 
-export const Box = ({ children, ...props }) => {
-
+export const Box = React.memo(props => {
     return (
         <Container
             { ...props }
-        >
-            { children }
-        </Container>
+        />
     )
-}
+})

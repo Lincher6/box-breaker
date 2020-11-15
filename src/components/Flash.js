@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, {useCallback, useState} from 'react'
 import styled from 'styled-components/macro'
-import {getIdGenerator} from "../utils";
+import {debounce, getIdGenerator} from "../utils";
+import shootSound from '../assets/shot.wav'
+import missSound from '../assets/miss.ogg'
 
 const Container = styled.div`
   position: absolute;
@@ -11,6 +13,7 @@ const Container = styled.div`
   border-radius: 50%;
   border: 3px solid white;
   opacity: 0;
+  pointer-events: none;
   animation: shot .6s;
   
   @keyframes shot {
@@ -19,6 +22,9 @@ const Container = styled.div`
   }
 `
 const generateId = getIdGenerator()
+const shoot = new Audio(shootSound)
+const miss = new Audio(missSound)
+shoot.volume = .3
 
 export const Flash = (props) => {
     return (
@@ -29,15 +35,21 @@ export const Flash = (props) => {
 export const useFlashes = () => {
     const [ flashes, setFlashes ] = useState([])
 
+    const clearFlashes = useCallback(debounce(() => setFlashes([]), 600), [])
+
     const addFlash = (top, left) => {
+        clearFlashes()
+        shoot.currentTime = 0
+        shoot.play()
+
         const id = generateId()
         setFlashes(prevState => [ ...prevState, <Flash key={id} id={id} top={top} left={left}/> ])
-        setTimeout(() => {
-            setFlashes(prevState => prevState.filter(flash => flash.id !== id))
-            setFlashes(prevState => console.log(prevState))
-        }, 1000)
-        console.log(flashes)
     }
 
-    return { flashes, addFlash }
+    const missTarget = () => {
+        miss.currentTime = 0
+        miss.play()
+    }
+
+    return { flashes, addFlash, missTarget }
 }

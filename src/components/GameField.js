@@ -5,24 +5,37 @@ import {BOX_SIZE} from "../constants";
 import {getIdGenerator} from "../utils";
 import {useContextActions, useContextState} from "../context/Context";
 import {useFlashes} from "./Flash";
+import background from '../assets/background.jpg'
 
 const Container = styled.div`
   position: relative;
   display: flex;
   height: 100%;
   flex-grow: 1;
-  background-color: #182533;
-  border-radius: 10px;
-  border: 2px solid darkcyan;
+  border: 1px solid darkcyan;
   cursor: crosshair;
   overflow: hidden;
+  border-radius: 5px;
+  
+  &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .05;
+      z-index: -1;
+      background: url(${() => background});
+      background-size: 100% 100%;
+  }
 `
 const nextId = getIdGenerator()
 
 export const GameField = () => {
     const { boxes, isPaused, isStarted } = useContextState()
     const { addScore, addBox, removeBox } = useContextActions()
-    const { flashes, addFlash } = useFlashes()
+    const { flashes, addFlash, missTarget } = useFlashes()
 
     const fieldRef = useRef(null)
     const height = useRef(0)
@@ -30,16 +43,19 @@ export const GameField = () => {
     const timer = useRef()
 
     const handleShot = event => {
-        const rect = event.target.getBoundingClientRect()
-        const top = event.clientY - rect.top
-        const left = event.clientX - rect.left
-        addFlash(top, left)
-    }
+        const { type, id } = event.target.dataset
+        if (type === "box") {
+            addScore(1)
+            removeBox(id)
+            createBoxes(Math.floor(Math.random() * 4))
+            const rect = event.currentTarget.getBoundingClientRect()
+            const top = event.clientY - rect.top
+            const left = event.clientX - rect.left
+            addFlash(top, left)
+        } else {
+            missTarget()
+        }
 
-    const handleHitBox = (id) => {
-        addScore(1)
-        removeBox(id)
-        createBoxes(Math.floor(Math.random() * 4))
     }
 
     const createBoxes = (amount) => {
@@ -81,7 +97,8 @@ export const GameField = () => {
                         key={box.id}
                         top={box.top}
                         left={box.left}
-                        onClick={() => handleHitBox(box.id)}
+                        data-type="box"
+                        data-id={box.id}
                     />
                 )
             })}
