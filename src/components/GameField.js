@@ -1,41 +1,29 @@
 import React, {useEffect, useRef, useState} from 'react'
 import styled from 'styled-components/macro'
 import {Box} from "./Box";
-import {BOX_SIZE} from "../constants";
+import {BOX_SIZE, SUB} from "../constants";
 import {getIdGenerator} from "../utils";
 import {useContextActions, useContextState} from "../context/Context";
 import {useFlashes} from "./Flash";
-import background from '../assets/background.jpg'
 
 const Container = styled.div`
   position: relative;
   display: flex;
   height: 100%;
   flex-grow: 1;
-  border: 1px solid darkcyan;
+  border: 1px solid ${() => SUB};
   cursor: crosshair;
   overflow: hidden;
   border-radius: 5px;
-  
-  &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: .05;
-      z-index: -1;
-      background: url(${() => background});
-      background-size: 100% 100%;
-  }
+  pointer-events: ${({active}) => active ? 'auto' : 'none'};
+  background-color: #0e1621;
 `
 const nextId = getIdGenerator()
 
 export const GameField = () => {
-    const { boxes, isPaused, isStarted } = useContextState()
-    const { addScore, addBox, removeBox } = useContextActions()
-    const { flashes, addFlash, missTarget } = useFlashes()
+    const {boxes, isPaused, gameStatus } = useContextState()
+    const {addScore, addBox, removeBox} = useContextActions()
+    const {flashes, addFlash, missTarget} = useFlashes()
 
     const fieldRef = useRef(null)
     const height = useRef(0)
@@ -43,7 +31,7 @@ export const GameField = () => {
     const timer = useRef()
 
     const handleShot = event => {
-        const { type, id } = event.target.dataset
+        const {type, id} = event.target.dataset
         if (type === "box") {
             addScore(1)
             removeBox(id)
@@ -55,14 +43,13 @@ export const GameField = () => {
         } else {
             missTarget()
         }
-
     }
 
     const createBoxes = (amount) => {
         for (let i = 0; i < amount; i++) {
             const top = Math.abs(Math.floor(Math.random() * height.current) - BOX_SIZE)
             const left = Math.abs(Math.floor(Math.random() * width.current) - BOX_SIZE)
-            addBox({ id: nextId(), top, left })
+            addBox({id: nextId(), top, left})
         }
     }
 
@@ -74,22 +61,31 @@ export const GameField = () => {
     }, [])
 
     useEffect(() => {
-        if (isStarted) {
-            const fieldStyle = fieldRef.current.style
-            if (isPaused) {
-                clearTimeout(timer.current)
-                fieldStyle.pointerEvents = `none`
-            } else {
-                timer.current = setInterval(() => {
-                    createBoxes(1)
-                }, 1000)
-                fieldStyle.pointerEvents = `auto`
-            }
+        if (isPaused) {
+            clearTimeout(timer.current)
         }
-    }, [isPaused, isStarted])
+        else {
+            timer.current = setInterval(() => {
+                createBoxes(1)
+            }, 3000)
+        }
+    }, [isPaused])
+
+    useEffect(() => {
+        if (gameStatus.active) {
+            createBoxes(4)
+        }
+        else {
+            clearTimeout(timer.current)
+        }
+    }, [gameStatus])
 
     return (
-        <Container ref={fieldRef} onClick={handleShot}>
+        <Container
+            ref={fieldRef}
+            onClick={handleShot}
+            active={gameStatus.active && !isPaused}
+        >
             {flashes}
             {boxes.map(box => {
                 return (

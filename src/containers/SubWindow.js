@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components/macro'
+import {SUB} from "../constants";
 
 const Container = styled.div`
+  margin: 10px;
   display: flex;
-  align-items: center;
-  flex-grow: 1;
-  width: 100%;
-  margin-bottom: 10px;
+  flex-direction: column;
+  width: 300px;
 `
 
-export const Body = ({ children }) => {
+export const SubWindow = ({ children }) => {
     return (
         <Container>{ children }</Container>
     )

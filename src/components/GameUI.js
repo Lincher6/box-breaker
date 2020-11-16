@@ -7,27 +7,27 @@ import {useContextActions, useContextState} from "../context/Context";
 
 const Container = styled.div`
   display: flex;
+  padding: 10px;
   flex-grow: 1;
   justify-content: space-between;
   align-items: center;
 `
-
+const Controls = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+`
 export const GameUI = () => {
-    const { isStarted, isPaused } = useContextState()
+    const { gameStatus: { active }, isPaused } = useContextState()
     const { startGame, pauseGame } = useContextActions()
-
-    const handlePause = () => {
-        pauseGame()
-    }
 
     return (
         <Container>
-            <div>
+            <Controls>
                 <Button
                     variant="contained"
-                    color="secondary"
-                    onClick={handlePause}
-                    disabled={!isStarted}
+                    color="primary"
+                    onClick={pauseGame}
+                    disabled={!active}
                 >
                     {isPaused ? "RESUME" : "PAUSE"}
                 </Button>
@@ -36,14 +36,12 @@ export const GameUI = () => {
                     color="secondary"
                     onClick={startGame}
                 >
-                    {isStarted ? "RESTART" : "NEW GAME"}
+                    {active ? "RESTART" : "NEW GAME"}
                 </Button>
-            </div>
+            </Controls>
 
             <Timer/>
-            <Score>
-
-            </Score>
+            <Score/>
         </Container>
     )
 }

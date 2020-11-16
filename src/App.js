@@ -1,20 +1,22 @@
 import React from 'react'
 import Grid from "@material-ui/core/Grid";
 import {GameField, GameUI, ResultsTable, Title} from "./components";
-import {Header} from "./containers/Header";
-import {Body} from "./containers/Body";
+import {GameOverDialog} from "./components/GameOverDialog";
+import {GameWindow} from "./containers/GameWindow";
+import {SubWindow} from "./containers/SubWindow";
 
 function App() {
     return (
         <div className="app">
-            <Header>
+            <GameWindow>
                 <GameUI/>
-                <Title/>
-            </Header>
-            <Body>
                 <GameField/>
+            </GameWindow>
+            <SubWindow>
+                <Title/>
                 <ResultsTable/>
-            </Body>
+            </SubWindow>
+            <GameOverDialog/>
         </div>
     );
 }

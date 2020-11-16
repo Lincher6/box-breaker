@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import boxImg from '../assets/box.png'
+import {BOX_SIZE} from "../constants";
 
 const Container = styled.div`
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: ${() => BOX_SIZE + 'px'};
+  height: ${() => BOX_SIZE + 'px'};
+  border-radius: 4px;
   top: ${({ top }) => top + 'px'};
   left: ${({ left }) => left + 'px'};
   background: url(${boxImg});

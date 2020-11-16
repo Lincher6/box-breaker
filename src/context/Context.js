@@ -1,14 +1,18 @@
 import React, {useContext} from "react";
 import {createContext, useState} from 'react'
+import {sortResults, storage} from "../utils";
 
 const Context = createContext()
 
-export const ContextProvider = ({ children }) => {
-    const [ state, setState ] = useState({
+export const ContextProvider = ({children}) => {
+    const [state, setState] = useState({
         score: 0,
+        results: storage(),
         boxes: [],
-        isStarted: false,
-        isPaused: false,
+        time: new Date(1000 * 6),
+        gameStatus: {active: false},
+        isGameOver: false,
+        isPaused: true
     })
     const actions = {
         addScore: amount => {
@@ -20,7 +24,7 @@ export const ContextProvider = ({ children }) => {
         addBox: (newBox) => {
             setState(prevState => ({
                 ...prevState,
-                boxes: [ ...prevState.boxes, newBox ]
+                boxes: [...prevState.boxes, newBox]
             }))
         },
         removeBox: (id) => {
@@ -29,25 +33,59 @@ export const ContextProvider = ({ children }) => {
                 boxes: prevState.boxes.filter(box => box.id !== id)
             }))
         },
+        countDown: () => {
+            setState(prevState => {
+                if (prevState.time > 0) {
+                    return {
+                        ...prevState,
+                        time: new Date(prevState.time - 1000)
+                    }
+                }
+                return {
+                    ...prevState,
+                    gameStatus: {active: false},
+                    isGameOver: true,
+                    isPaused: true
+                }
+            })
+        },
         startGame: () => {
-            setState({
-                ...state,
+            setState(prevState => ({
+                ...prevState,
                 score: 0,
                 boxes: [],
-                isStarted: true,
-                isPaused: false
-            })
+                time: new Date(1000 * 6),
+                gameStatus: {active: true},
+                isPaused: false,
+                isGameOver: false
+            }))
         },
         pauseGame: () => {
             setState(prevState => ({
                 ...prevState,
-                isPaused: !prevState.isPaused
+                isPaused: !prevState.isPaused,
             }))
         },
+        closeDialog: () => {
+            setState(prevState => ({
+                ...prevState,
+                isGameOver: false,
+            }))
+        },
+        submitDialog: (newRecord) => {
+            setState(prevState => {
+                const results = sortResults([ ...prevState.results, newRecord])
+                storage(results)
+                return {
+                    ...prevState,
+                    results
+                }
+            })
+        }
     }
 
     return (
-        <Context.Provider value={{ state, actions }}>
+        <Context.Provider value={{state, actions}}>
             {children}
         </Context.Provider>
     )

@@ -19,3 +19,20 @@ export const debounce = (fn, delay) => {
         }, delay)
     }
 }
+
+export const storage = (result) => {
+    if (result) {
+        localStorage.setItem('results', JSON.stringify(result))
+    } else {
+        const data = JSON.parse(localStorage.getItem('results'))
+        return data ? data : []
+    }
+}
+
+export const sortResults = (results) => {
+    console.log(results)
+    const NEW = results.sort((a, b) => b.score - a.score)
+    console.log(NEW)
+
+    return results.sort((a, b) => a.score < b.score)
+}

@@ -6,8 +6,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  height: 100%;
+  padding: 10px;
   width: 300px;
 `
 
@@ -15,12 +14,15 @@ const Logo = styled.img`
   width: 160px;
   height: 160px;
   object-fit: contain;
+  cursor: pointer;
 `
 
 export const Title = (props) => {
     return (
         <Container>
-            <Logo src={logo} alt=""/>
+            <a href="https://github.com/Lincher6/box-breaker" target="_blank" rel="noreferrer">
+                <Logo src={logo} alt=""/>
+            </a>
         </Container>
     )
 }

@@ -2,14 +2,13 @@ import React from 'react'
 import styled from 'styled-components/macro'
 
 const Container = styled.div`
+  padding: 0 0 20px 20px;
   display: flex;
-  align-items: center;
-  min-height: 150px;
-  width: 100%;
-  margin-bottom: 10px;
+  flex-direction: column;
+  flex-grow: 1;
 `
 
-export const Header = ({ children }) => {
+export const GameWindow = ({ children }) => {
     return (
         <Container>{ children }</Container>
     )

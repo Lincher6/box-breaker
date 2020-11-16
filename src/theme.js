@@ -1,17 +1,22 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import {PRIMARY, SECONDARY} from "./constants";
 
 export const theme = createMuiTheme({
     palette: {
+        type: `dark`,
         primary: {
-            main: '#00e5ff',
+            main: PRIMARY,
         },
         secondary: {
-            main: '#ff6000',
+            main: SECONDARY,
         },
         action: {
             disabledBackground: 'rgba(100, 100, 100, .5)',
             disabled: 'white'
-        }
+        },
+        background: {
+            paper: `#182533`
+        },
     },
 
     overrides: {
@@ -21,7 +26,7 @@ export const theme = createMuiTheme({
                 margin: `10px`,
                 fontFamily: `DigitalClock`,
                 fontSize: 24,
-                minWidth: 120
+                minWidth: 130
             },
         }
     }
