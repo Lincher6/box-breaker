@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import {createContext, useState} from 'react'
 import {sortResults, storage} from "../utils";
+import {MINUTE} from "../constants";
 
 const Context = createContext()
 
@@ -9,7 +10,7 @@ export const ContextProvider = ({children}) => {
         score: 0,
         results: storage(),
         boxes: [],
-        time: new Date(1000 * 6),
+        time: new Date(MINUTE),
         gameStatus: {active: false},
         isGameOver: false,
         isPaused: true
@@ -54,7 +55,7 @@ export const ContextProvider = ({children}) => {
                 ...prevState,
                 score: 0,
                 boxes: [],
-                time: new Date(1000 * 6),
+                time: new Date(MINUTE),
                 gameStatus: {active: true},
                 isPaused: false,
                 isGameOver: false

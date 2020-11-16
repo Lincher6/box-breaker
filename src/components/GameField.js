@@ -29,6 +29,7 @@ export const GameField = () => {
     const height = useRef(0)
     const width = useRef(0)
     const timer = useRef()
+    const positions = useRef([])
 
     const handleShot = event => {
         const {type, id} = event.target.dataset
@@ -47,8 +48,16 @@ export const GameField = () => {
 
     const createBoxes = (amount) => {
         for (let i = 0; i < amount; i++) {
-            const top = Math.abs(Math.floor(Math.random() * height.current) - BOX_SIZE)
-            const left = Math.abs(Math.floor(Math.random() * width.current) - BOX_SIZE)
+            const rawTop = Math.abs(Math.floor(Math.random() * height.current) - BOX_SIZE)
+            const rawLeft = Math.abs(Math.floor(Math.random() * width.current) - BOX_SIZE)
+            const top = rawTop - (rawTop % BOX_SIZE)
+            const left = rawLeft - (rawLeft % BOX_SIZE)
+            if (positions.current.some(position => position.top === top && position.left === left)) {
+                i--
+                continue
+            }
+            positions.current.push({top, left})
+
             addBox({id: nextId(), top, left})
         }
     }
