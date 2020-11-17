@@ -1,4 +1,3 @@
-import React from "react";
 import {BOX_SIZE} from "./constants";
 
 export const getIdGenerator = (prefix = "id-") => {
