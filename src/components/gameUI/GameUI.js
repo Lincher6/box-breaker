@@ -1,24 +1,13 @@
 import React from 'react'
-import styled from 'styled-components/macro'
+import {Container, Controls, Info} from "./styles";
 import Button from "@material-ui/core/Button";
-import {Timer} from "./Timer";
-import {Score} from "./Score";
-import {useContextActions, useContextState} from "../context/Context";
+import {Timer, Score} from "components";
+import {useContextActions, useContextState} from "context/Context";
 
-const Container = styled.div`
-  display: flex;
-  padding: 10px;
-  flex-grow: 1;
-  justify-content: space-between;
-  align-items: center;
-`
-const Controls = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-`
+
 export const GameUI = () => {
-    const { gameStatus: { active }, isPaused } = useContextState()
-    const { startGame, pauseGame } = useContextActions()
+    const {gameStatus: {active}, isPaused} = useContextState()
+    const {startGame, pauseGame} = useContextActions()
 
     return (
         <Container>
@@ -40,8 +29,10 @@ export const GameUI = () => {
                 </Button>
             </Controls>
 
-            <Timer/>
-            <Score/>
+            <Info>
+                <Timer/>
+                <Score/>
+            </Info>
         </Container>
     )
 }

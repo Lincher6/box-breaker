@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {createContext, useState} from 'react'
-import {sortResults, storage} from "../utils";
-import {MINUTE} from "../constants";
+import {sortResults, storage} from "lib/utils";
+import {MINUTE} from "lib/constants";
 
 const Context = createContext()
 
@@ -15,6 +15,7 @@ export const ContextProvider = ({children}) => {
         isGameOver: false,
         isPaused: true
     })
+
     const actions = {
         addScore: amount => {
             setState(prevState => ({

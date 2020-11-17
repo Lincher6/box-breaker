@@ -1,9 +1,6 @@
 import React from 'react'
-import Grid from "@material-ui/core/Grid";
-import {GameField, GameUI, ResultsTable, Title} from "./components";
-import {GameOverDialog} from "./components/GameOverDialog";
-import {GameWindow} from "./containers/GameWindow";
-import {SubWindow} from "./containers/SubWindow";
+import {GameField, GameUI, ResultsTable, Title, GameOverDialog} from "components";
+import {GameWindow, Sidebar} from "containers";
 
 function App() {
     return (
@@ -12,10 +9,10 @@ function App() {
                 <GameUI/>
                 <GameField/>
             </GameWindow>
-            <SubWindow>
+            <Sidebar>
                 <Title/>
                 <ResultsTable/>
-            </SubWindow>
+            </Sidebar>
             <GameOverDialog/>
         </div>
     );

@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {useContextActions, useContextState} from "../context/Context";
+import {useContextActions, useContextState} from "context/Context";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -7,13 +7,13 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
-import {SECONDARY} from "../constants";
+import {SECONDARY} from "lib/constants";
 
 export const GameOverDialog = () => {
-    const [ name, setName ] = useState('')
-    const [ error, setError ] = useState('')
-    const { isGameOver, score, results } = useContextState()
-    const { closeDialog, submitDialog } = useContextActions()
+    const [name, setName] = useState('')
+    const [error, setError] = useState('')
+    const {isGameOver, score} = useContextState()
+    const {closeDialog, submitDialog} = useContextActions()
 
     const handleSubmit = (e) => {
         e.preventDefault()

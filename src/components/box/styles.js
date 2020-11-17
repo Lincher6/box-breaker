@@ -1,9 +1,8 @@
-import React from 'react'
 import styled from 'styled-components/macro'
-import boxImg from '../assets/box.png'
-import {BOX_SIZE} from "../constants";
+import boxImg from 'assets/box.png'
+import {BOX_SIZE} from "lib/constants";
 
-const Container = styled.div`
+export const Container = styled.div`
   position: absolute;
   width: ${() => BOX_SIZE + 'px'};
   height: ${() => BOX_SIZE + 'px'};
@@ -21,11 +20,3 @@ const Container = styled.div`
     100% {transform: scale(1, 1)}
   }
 `
-
-export const Box = React.memo(props => {
-    return (
-        <Container
-            { ...props }
-        />
-    )
-})
