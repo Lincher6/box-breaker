@@ -38,5 +38,5 @@ export const storage = (result) => {
 }
 
 export const sortResults = (results) => {
-    return results.sort((a, b) => a.score < b.score)
+    return results.sort((a, b) => b.score - a.score)
 }
