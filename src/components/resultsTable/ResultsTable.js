@@ -1,10 +1,11 @@
 import React from 'react'
 import {Container, Title, Record, SubText, Name, Score} from "./styles";
-import {useContextState} from "context/Context";
+import {useSelector} from "react-redux";
+import {selectors} from "../../store";
 
 
 export const ResultsTable = () => {
-    const {results} = useContextState()
+    const results = useSelector(selectors.results)
 
     return (
         <Container>

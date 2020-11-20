@@ -4,12 +4,13 @@ import './index.css';
 import App from './App';
 import {MuiThemeProvider} from "@material-ui/core";
 import { theme } from "./lib/theme";
-import {ContextProvider} from "./context/Context";
+import {Provider} from "react-redux";
+import {store} from "./store";
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
-        <ContextProvider>
+        <Provider store={store}>
             <App/>
-        </ContextProvider>
+        </Provider>
     </MuiThemeProvider>
     , document.getElementById('root'));

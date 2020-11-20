@@ -1,10 +1,12 @@
 import React, {useEffect, useRef} from 'react'
 import {Container} from "./styles";
-import {useContextActions, useContextState} from "context/Context";
+import {useDispatch, useSelector} from "react-redux";
+import {actions, selectors} from "../../store";
 
 export const Timer = () => {
-    const {time, isPaused} = useContextState()
-    const {countDown} = useContextActions()
+    const time = useSelector(selectors.time)
+    const isPaused = useSelector(selectors.isPaused)
+    const dispatch = useDispatch()
     const minutes = time.getMinutes()
     const seconds = time.getSeconds()
 
@@ -15,7 +17,7 @@ export const Timer = () => {
             clearInterval(timer.current)
         } else {
             timer.current = setInterval(() => {
-                countDown()
+                dispatch(actions.countdown())
             }, 1000)
         }
     }, [isPaused])

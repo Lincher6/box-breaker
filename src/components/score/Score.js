@@ -1,9 +1,10 @@
 import React from 'react'
 import {Container} from "./styles";
-import {useContextState} from "context/Context";
+import {useSelector} from "react-redux";
+import {selectors} from "../../store";
 
 export const Score = () => {
-    const {score} = useContextState()
+    const score = useSelector(selectors.score)
 
     return (
         <Container>
