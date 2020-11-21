@@ -8,7 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import {SECONDARY} from "lib/constants";
 import {useDispatch, useSelector} from "react-redux";
-import {actions, selectors} from "../../store";
+import {actions, selectors} from "store";
 
 export const GameOverDialog = () => {
     const [name, setName] = useState('')

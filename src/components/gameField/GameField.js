@@ -1,11 +1,10 @@
 import React, {useEffect, useRef} from 'react'
 import {Container} from "./styles";
-import {checkPosition, getElement, getIdGenerator, getOffset} from "lib/utils";
-import {useHits} from "../hit/Hit";
+import {checkHitBox, checkPosition, getComponent, getIdGenerator, getOffset} from "lib/utils";
+import {useHits} from "../effects/hit/Hit";
 import {useDispatch, useSelector} from "react-redux";
-import {actions, selectors} from "../../store";
-import {usePoints} from "../points/Points";
-import {soundManager} from "lib/soundManager";
+import {actions, selectors} from "store";
+import {usePoints} from "../effects/points/Points";
 
 const nextId = getIdGenerator()
 
@@ -26,16 +25,11 @@ export const GameField = () => {
 
     const handleShot = event => {
         const {type} = event.target.dataset
-        if (type === "boxes") {
-            createElements(Math.floor(Math.random() * 5))
+        const data = checkHitBox(type)
+        if (data) {
+            createElements(data.elementsToCreate)
             addHit(event)
-            addPoints(event, 1)
-        } else if (type === "timeEaters") {
-            createElements(2)
-            addHit(event)
-            addPoints(event, 2)
-        } else {
-            soundManager.playMiss()
+            addPoints(event, data.points)
         }
     }
 
@@ -50,7 +44,7 @@ export const GameField = () => {
             positions.current.push({top, left})
             dispatch(actions.addElement({
                 id: nextId(),
-                ...getElement(),
+                Component: getComponent(),
                 top,
                 left
             }))
@@ -98,7 +92,6 @@ export const GameField = () => {
                         id={data.id}
                         top={data.top}
                         left={data.left}
-                        data-type={data.type}
                     />
                 )
             })}

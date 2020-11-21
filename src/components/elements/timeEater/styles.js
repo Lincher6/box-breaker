@@ -4,12 +4,13 @@ export const Container = styled.div`
   border-radius: 70px;
   border: 3px solid #fff;
   position: absolute;
-  top: ${({top}) => top + 'px'};
-  left: ${({left}) => left + 'px'};
+  top: ${({top}) => (top - 30) + 'px'};
+  left: ${({left}) => (left - 30) + 'px'};
   display: block;
   width: 120px;
   height: 120px;
   animation: flow 5s ease-out;
+  z-index: 2;
   
   &:after{
     content: "";
@@ -63,17 +64,11 @@ export const Container = styled.div`
   
   @keyframes flow{
     0%{background-color: transparent; transform: scale(0, 0)}
+    25%{background-color: transparent;}
     100%{background-color: red; transform: scale(1, 1)}
   }
   
-  .play { 
-    animation-play-state: running;
-    -webkit-animation-play-state: running;
-    -o-animation-play-state: running;
-    -moz-animation-play-state: running;
-  }
-  
-  .stop {
+  &.stop {
     animation-play-state: paused;
     -webkit-animation-play-state: paused;
     -o-animation-play-state: paused;

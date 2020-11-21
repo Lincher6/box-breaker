@@ -1,7 +1,7 @@
 import React from 'react'
 import {Container, Title, Record, SubText, Name, Score} from "./styles";
 import {useSelector} from "react-redux";
-import {selectors} from "../../store";
+import {selectors} from "store";
 
 
 export const ResultsTable = () => {

@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react'
 import {Container} from "./styles";
 import {useDispatch, useSelector} from "react-redux";
-import {actions, selectors} from "../../store";
+import {actions, selectors} from "store";
 
 export const Timer = () => {
     const time = useSelector(selectors.time)

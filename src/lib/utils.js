@@ -1,6 +1,6 @@
 import {BOX_SIZE} from "./constants";
-import {TimeEater, Box} from "components";
-import {actions} from "../store";
+import {TimeEater, Box, ArmoredBlock, Ufo} from "components";
+import {soundManager} from "./soundManager";
 
 export const getIdGenerator = (prefix = "id-") => {
     let id = 0
@@ -15,17 +15,36 @@ export const getOffset = size => {
     return rawOffset - (rawOffset % BOX_SIZE)
 }
 
-export const getElement = () => {
-    const selector = Math.floor(Math.random() * 8)
-    switch (selector) {
-        case 0: return {Component: TimeEater, type: "timeEaters"}
-        default: return {Component: Box, type: "boxes"}
+export const getComponent = () => {
+    const selector = Math.floor(Math.random() * 25)
+    if (selector < 1) {
+        return Ufo
+    } else if (selector < 4) {
+        return TimeEater
+    } else if (selector < 7) {
+        return ArmoredBlock
     }
-
+    return Box
 }
 
 export const checkPosition = (positions, {top,left}) => {
     return positions.some(position => position.top === top && position.left === left)
+}
+
+export const checkHitBox = type => {
+    if (type === "boxes") {
+        return {elementsToCreate: Math.floor(Math.random() * 5), points: 1}
+    } else if (type === "timeEaters") {
+        return {elementsToCreate: 2, points: 2}
+    } else if (type && type.startsWith("armor")) {
+        if (type === "armor-0") {
+            return {elementsToCreate: 4, points: 5}
+        }
+    } else if (type === "ufo") {
+        return {elementsToCreate: 1, points: 10}
+    } else {
+        soundManager.playMiss()
+    }
 }
 
 export const getEffectPosition = event => {

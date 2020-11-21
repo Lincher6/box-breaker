@@ -4,8 +4,8 @@ import {BOX_SIZE} from "lib/constants";
 
 export const Container = styled.div`
   position: absolute;
-  width: ${() => BOX_SIZE + 'px'};
-  height: ${() => BOX_SIZE + 'px'};
+  width: ${BOX_SIZE + 'px'};
+  height: ${BOX_SIZE + 'px'};
   border-radius: 4px;
   top: ${({ top }) => top + 'px'};
   left: ${({ left }) => left + 'px'};

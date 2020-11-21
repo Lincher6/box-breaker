@@ -2,7 +2,6 @@ import React, {useCallback, useState} from 'react'
 import {Container} from "./styles";
 import {debounce, getEffectPosition, getIdGenerator} from "lib/utils";
 import {soundManager} from "lib/soundManager";
-import {BOX_SIZE} from "../../lib/constants";
 
 const generateId = getIdGenerator()
 

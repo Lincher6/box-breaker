@@ -1,5 +1,4 @@
 export const elements = state => state.elements
-export const timeEaters = state => state.timeEaters
 export const score = state => state.score
 export const time = state => state.time
 export const results = state => state.results

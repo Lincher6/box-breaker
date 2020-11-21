@@ -1,4 +1,3 @@
-import React from "react";
 import {
     ADD_ELEMENT,
     ADD_SCORE,
@@ -10,7 +9,6 @@ import {
     SUBMIT_DIALOG,
     SUBTRACT_TIME
 } from "./types";
-import {Box} from "../components";
 
 export const addElement = element => ({
     type: ADD_ELEMENT,

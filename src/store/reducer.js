@@ -46,7 +46,7 @@ export const reducer = (state = initialState, action) => {
         case START_GAME: return {
             ...state,
             score: 0,
-            boxes: [],
+            elements: [],
             time: new Date(MINUTE),
             gameStatus: {active: true},
             isPaused: false,

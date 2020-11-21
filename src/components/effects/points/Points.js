@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react'
 import {Container} from "./styles";
-import {debounce, getEffectPosition, getIdGenerator} from "../../lib/utils";
+import {debounce, getEffectPosition, getIdGenerator} from "lib/utils";
 
 const generateId = getIdGenerator()
 

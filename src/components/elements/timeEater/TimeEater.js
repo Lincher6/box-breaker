@@ -32,7 +32,7 @@ export const TimeEater = React.memo(({ id, ...props }) => {
         if (isPaused) {
             element.current.classList.add('stop')
         } else {
-            element.current.classList.remove('play')
+            element.current.classList.remove('stop')
         }
     }, [isPaused])
 
@@ -45,6 +45,7 @@ export const TimeEater = React.memo(({ id, ...props }) => {
         <Container
             ref={element}
             onClick={handleClick}
+            data-type="timeEaters"
             {...props}
         />
     )
