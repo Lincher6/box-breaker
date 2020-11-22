@@ -1,16 +1,21 @@
 import React, {useEffect, useRef} from 'react'
 import {Container} from "./styles";
-import {Box} from "components";
-import {checkPosition, getIdGenerator, getOffset} from "lib/utils";
-import {useContextActions, useContextState} from "context/Context";
-import {useHits} from "../hit/Hit";
+import {checkHitBox, checkPosition, getComponent, getIdGenerator, getOffset} from "lib/utils";
+import {useHits} from "../effects/hit/Hit";
+import {useDispatch, useSelector} from "react-redux";
+import {actions, selectors} from "store";
+import {usePoints} from "../effects/points/Points";
 
 const nextId = getIdGenerator()
 
 export const GameField = () => {
-    const {boxes, isPaused, gameStatus } = useContextState()
-    const {addScore, addBox, removeBox} = useContextActions()
-    const {hits, addHit, missTarget} = useHits()
+    const elements = useSelector(selectors.elements)
+    const isPaused = useSelector(selectors.isPaused)
+    const gameStatus = useSelector(selectors.gameStatus)
+    const dispatch = useDispatch()
+
+    const {hits, addHit} = useHits()
+    const {points, addPoints} = usePoints()
 
     const fieldRef = useRef(null)
     const height = useRef(0)
@@ -19,18 +24,16 @@ export const GameField = () => {
     const positions = useRef([])
 
     const handleShot = event => {
-        const {type, id} = event.target.dataset
-        if (type === "box") {
-            addScore(1)
-            removeBox(id)
-            createBoxes(Math.floor(Math.random() * 5))
+        const {type} = event.target.dataset
+        const data = checkHitBox(type)
+        if (data) {
+            createElements(data.elementsToCreate)
             addHit(event)
-        } else {
-            missTarget()
+            addPoints(event, data.points)
         }
     }
 
-    const createBoxes = (amount) => {
+    const createElements = (amount) => {
         for (let i = 0; i < amount; i++) {
             const top = getOffset(height.current)
             const left = getOffset(width.current)
@@ -39,7 +42,12 @@ export const GameField = () => {
                 continue
             }
             positions.current.push({top, left})
-            addBox({id: nextId(), top, left})
+            dispatch(actions.addElement({
+                id: nextId(),
+                Component: getComponent(),
+                top,
+                left
+            }))
         }
     }
 
@@ -53,19 +61,17 @@ export const GameField = () => {
     useEffect(() => {
         if (isPaused) {
             clearTimeout(timer.current)
-        }
-        else {
+        } else {
             timer.current = setInterval(() => {
-                createBoxes(1)
+                createElements(1)
             }, 3000)
         }
     }, [isPaused])
 
     useEffect(() => {
         if (gameStatus.active) {
-            createBoxes(4)
-        }
-        else {
+            createElements(4)
+        } else {
             clearTimeout(timer.current)
         }
     }, [gameStatus])
@@ -75,16 +81,17 @@ export const GameField = () => {
             ref={fieldRef}
             onClick={handleShot}
             active={gameStatus.active && !isPaused}
+            isPaused={isPaused && gameStatus.active}
         >
+            {points}
             {hits}
-            {boxes.map(box => {
+            {elements.map(({Component, ...data}) => {
                 return (
-                    <Box
-                        key={box.id}
-                        top={box.top}
-                        left={box.left}
-                        data-type="box"
-                        data-id={box.id}
+                    <Component
+                        key={data.id}
+                        id={data.id}
+                        top={data.top}
+                        left={data.left}
                     />
                 )
             })}

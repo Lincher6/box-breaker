@@ -1,13 +1,30 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Container, Controls, Info} from "./styles";
 import Button from "@material-ui/core/Button";
 import {Timer, Score} from "components";
-import {useContextActions, useContextState} from "context/Context";
-
+import {useDispatch, useSelector} from "react-redux";
+import {actions, selectors} from "store";
 
 export const GameUI = () => {
-    const {gameStatus: {active}, isPaused} = useContextState()
-    const {startGame, pauseGame} = useContextActions()
+    const { active } = useSelector(selectors.gameStatus)
+    const isPaused = useSelector(selectors.isPaused)
+    const dispatch = useDispatch()
+
+    const handleStart = () => {
+        dispatch(actions.startGame())
+    }
+    const handlePause = () => {
+        dispatch(actions.pauseGame())
+    }
+
+    useEffect(() => {
+        document.addEventListener("keydown", event => {
+            if (event.code === 'Space') {
+                event.preventDefault()
+                dispatch(actions.pauseGame())
+            }
+        })
+    }, [])
 
     return (
         <Container>
@@ -15,7 +32,7 @@ export const GameUI = () => {
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={pauseGame}
+                    onClick={handlePause}
                     disabled={!active}
                 >
                     {isPaused ? "RESUME" : "PAUSE"}
@@ -23,7 +40,7 @@ export const GameUI = () => {
                 <Button
                     variant="contained"
                     color="secondary"
-                    onClick={startGame}
+                    onClick={handleStart}
                 >
                     {active ? "RESTART" : "NEW GAME"}
                 </Button>
