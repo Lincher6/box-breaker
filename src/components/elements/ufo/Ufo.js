@@ -3,9 +3,6 @@ import {Container} from "./styles";
 import {useDispatch, useSelector} from "react-redux";
 import {actions, selectors} from "store";
 import {removeElement} from "store/actions";
-import {getBrowser} from "lib/utils";
-
-const browser = getBrowser()
 
 export const Ufo = React.memo(({id, ...props}) => {
     const isPaused = useSelector(selectors.isPaused)
@@ -23,15 +20,6 @@ export const Ufo = React.memo(({id, ...props}) => {
     }
 
     useEffect(() => {
-        if (["Chrome", "Safari", "Opera"].includes(browser)) {
-            element.current.addEventListener("webkitAnimationEnd", handleRemove)
-        }
-        else {
-            element.current.addEventListener("animationEnd", handleRemove)
-        }
-    }, [])
-
-    useEffect(() => {
         if (isPaused) {
             element.current.classList.add('stop')
         } else {
@@ -41,6 +29,7 @@ export const Ufo = React.memo(({id, ...props}) => {
 
     return (
         <Container
+            onAnimationEnd={handleRemove}
             ref={element}
             {...props}
             onClick={handleClick}

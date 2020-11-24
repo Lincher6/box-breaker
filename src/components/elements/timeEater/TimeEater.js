@@ -3,9 +3,6 @@ import {Container} from "./styles";
 import {useDispatch, useSelector} from "react-redux";
 import {actions, selectors} from "store";
 import {soundManager} from "lib/soundManager";
-import {getBrowser} from "lib/utils";
-
-const browser = getBrowser()
 
 export const TimeEater = React.memo(({ id, ...props }) => {
     const isPaused = useSelector(selectors.isPaused)
@@ -17,15 +14,6 @@ export const TimeEater = React.memo(({ id, ...props }) => {
         dispatch(actions.subtractTime(5000))
         dispatch(actions.removeElement(id))
         soundManager.playTimeDown()
-    }, [])
-
-    useEffect(() => {
-        if (["Chrome", "Safari", "Opera"].includes(browser)) {
-            element.current.addEventListener("webkitAnimationEnd", timeDown)
-        }
-        else {
-            element.current.addEventListener("animationEnd", timeDown)
-        }
     }, [])
 
     useEffect(() => {
@@ -43,6 +31,7 @@ export const TimeEater = React.memo(({ id, ...props }) => {
 
     return (
         <Container
+            onAnimationEnd={timeDown}
             ref={element}
             onClick={handleClick}
             data-type="timeEaters"
