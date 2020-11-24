@@ -11,7 +11,7 @@ export const Container = styled.div`
    background: url(${ufoImg});
    background-size: cover;
    filter: hue-rotate(0);
-   animation: ufo 2s infinite, fly 15s;
+   animation: ufo 2s infinite linear, fly 15s;
    z-index: 3;
    
    @keyframes ufo {
