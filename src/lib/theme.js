@@ -24,7 +24,7 @@ export const theme = createMuiTheme({
             root: {
                 fontWeight: `bold`,
                 margin: `10px`,
-                fontFamily: `DigitalClock`,
+                fontFamily: `DigitalClock, serif`,
                 fontSize: 24,
                 minWidth: 130,
             },

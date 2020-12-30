@@ -17,14 +17,17 @@ export const GameUI = () => {
         dispatch(actions.pauseGame())
     }
 
+    const handleKeyDown = event => {
+        if (event.code === 'Space' && active) {
+            event.preventDefault()
+            dispatch(actions.pauseGame())
+        }
+    }
+
     useEffect(() => {
-        document.addEventListener("keydown", event => {
-            if (event.code === 'Space') {
-                event.preventDefault()
-                dispatch(actions.pauseGame())
-            }
-        })
-    }, [])
+        document.addEventListener("keydown", handleKeyDown)
+        return () => document.removeEventListener('keydown', handleKeyDown)
+    }, [active])
 
     return (
         <Container>
