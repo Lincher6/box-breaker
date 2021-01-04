@@ -2,22 +2,33 @@ import styled from 'styled-components/macro'
 import {BACKGROUND} from "../../lib/constants";
 
 export const Container = styled.div`
-  margin: 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   width: 300px;
   
   @media (max-width: 1000px) {
+    display: none;
     position: absolute;
-    right: -1000px;
     justify-content: center;
     padding: 10px 50px;
-    background-color: ${() => BACKGROUND};
+    background-color: ${BACKGROUND};
     width: 100vw;
     height: 100vh;
-    transition: right .5s;
+    z-index: 10;
+    
+    &.show {
+      display: block;
+      right: 0;
+      animation: sidebar .5s;
+    }
+    
+    @keyframes sidebar {
+      0% {right: -1000px}
+      100% {right: 0}
+    }
   }
-`
+`;
 
 export const Toggle = styled.div`
   display: none;

@@ -3,37 +3,40 @@ import {Container} from "./styles";
 import {useDispatch, useSelector} from "react-redux";
 import {actions, selectors} from "store";
 import {removeElement} from "store/actions";
+import ufoImg from 'assets/UFO.png';
 
 export const Ufo = React.memo(({id, ...props}) => {
-    const isPaused = useSelector(selectors.isPaused)
-    const dispatch = useDispatch()
+    const isPaused = useSelector(selectors.isPaused);
+    const dispatch = useDispatch();
 
-    const element = useRef()
+    const element = useRef();
 
     const handleClick = () => {
-        dispatch(actions.addScore(10))
-        dispatch(removeElement(id))
+        dispatch(actions.addScore(10));
+        dispatch(removeElement(id));
     }
 
     const handleRemove = () => {
-        dispatch(removeElement(id))
+        dispatch(removeElement(id));
     }
 
     useEffect(() => {
         if (isPaused) {
-            element.current.classList.add('stop')
+            element.current.classList.add('stop');
         } else {
-            element.current.classList.remove('stop')
+            element.current.classList.remove('stop');
         }
-    }, [isPaused])
+    }, [isPaused]);
 
     return (
         <Container
+            draggable={false}
+            src={ufoImg}
             onAnimationEnd={handleRemove}
             ref={element}
             {...props}
             onClick={handleClick}
             data-type="ufo"
         />
-    )
-})
+    );
+});

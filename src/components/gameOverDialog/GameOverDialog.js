@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -11,30 +11,30 @@ import {useDispatch, useSelector} from "react-redux";
 import {actions, selectors} from "store";
 
 export const GameOverDialog = () => {
-    const [name, setName] = useState('')
-    const [error, setError] = useState('')
-    const isGameOver = useSelector(selectors.isGameOver)
-    const score = useSelector(selectors.score)
-    const dispatch = useDispatch()
+    const [name, setName] = useState('');
+    const [error, setError] = useState('');
+    const isGameOver = useSelector(selectors.isGameOver);
+    const score = useSelector(selectors.score);
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         if (name.length === 0) {
-            setError('must not be empty')
-            return
+            setError('must not be empty');
+            return;
         }
-        dispatch(actions.submitDialog({ name, score }))
-        dispatch(actions.closeDialog())
-        setError('')
-        setName('')
+        dispatch(actions.submitDialog({ name, score }));
+        dispatch(actions.closeDialog());
+        setError('');
+        setName('');
     }
 
     const handleClose = () => {
-        dispatch(actions.closeDialog())
+        dispatch(actions.closeDialog());
     }
 
     const handleChange = (e) => {
-        setName(e.target.value)
+        setName(e.target.value);
     }
 
     return (

@@ -1,5 +1,5 @@
-import styled from 'styled-components/macro'
-import boxImg from 'assets/box.png'
+import styled from 'styled-components/macro';
+import boxImg from 'assets/box.png';
 import {BOX_SIZE} from "lib/constants";
 
 export const Container = styled.div`
@@ -19,4 +19,4 @@ export const Container = styled.div`
     50% {transform: scale(1.1, 1.1)}
     100% {transform: scale(1, 1)}
   }
-`
+`;

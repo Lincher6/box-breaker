@@ -1,14 +1,14 @@
-import React from 'react'
-import {Container} from "./styles";
+import React from 'react';
+import {Container, Counter} from "./styles";
 import {useSelector} from "react-redux";
 import {selectors} from "store";
 
 export const Score = () => {
-    const score = useSelector(selectors.score)
+    const score = useSelector(selectors.score);
 
     return (
         <Container>
-            Score: {score}
+            Score: <Counter>{score}</Counter>
         </Container>
     )
 }

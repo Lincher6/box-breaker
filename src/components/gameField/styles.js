@@ -12,5 +12,5 @@ export const Container = styled.div`
   border-radius: 5px;
   pointer-events: ${({active}) => active ? 'auto' : 'none'};
   background-color: #0e1621;
-  opacity: ${({ isPaused }) => isPaused ? .5 : 1};
-`
+  opacity: ${({isPaused}) => isPaused ? .5 : 1};
+`;

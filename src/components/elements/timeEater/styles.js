@@ -74,4 +74,4 @@ export const Container = styled.div`
     -o-animation-play-state: paused;
     -moz-animation-play-state: paused;
   }
-`
+`;

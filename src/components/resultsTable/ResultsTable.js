@@ -1,11 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react';
 import {Container, Title, Record, SubText, Name, Score} from "./styles";
-import {useSelector} from "react-redux";
-import {selectors} from "store";
+import {useDispatch, useSelector} from "react-redux";
+import {actions, selectors} from "store";
 
 
 export const ResultsTable = () => {
-    const results = useSelector(selectors.results)
+    const results = useSelector(selectors.results) || [];
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(actions.getResults());
+    }, [])
 
     return (
         <Container>
@@ -26,4 +31,4 @@ export const ResultsTable = () => {
             }
         </Container>
     )
-}
+};

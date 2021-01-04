@@ -7,7 +7,8 @@ export const Container = styled.div`
   flex-grow: 1;
   justify-content: space-between;
   align-items: center;
-`
+`;
+
 export const Controls = styled.div`
   display: flex;
   flex-wrap: nowrap;
@@ -16,7 +17,7 @@ export const Controls = styled.div`
     width: 100%;
     justify-content: center;
   }
-`
+`;
 
 export const Info = styled.div`
   display: flex;
@@ -28,4 +29,4 @@ export const Info = styled.div`
     width: 100%;
     justify-content: center;
   }
-`
+`;

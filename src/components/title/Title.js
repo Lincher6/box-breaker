@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import {Container, Logo} from "./styles";
-import logo from 'assets/logo.png'
+import logo from 'assets/logo.png';
 import {GITHUB} from "lib/constants";
 
 
@@ -13,4 +13,4 @@ export const Title = () => {
             </a>
         </Container>
     )
-}
+};

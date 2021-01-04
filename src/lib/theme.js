@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
 import {PRIMARY, SECONDARY} from "./constants";
 
 export const theme = createMuiTheme({
@@ -30,6 +30,4 @@ export const theme = createMuiTheme({
             },
         }
     }
-
-
 });

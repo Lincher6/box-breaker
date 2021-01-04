@@ -3,7 +3,6 @@ const serveStatic = require('serve-static');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
-const { results } = require('./results.json');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,6 +10,8 @@ app.use(serveStatic('build'));
 app.use(bodyParser.json());
 
 app.get('/results', (req, res) => {
+    const rawJson = fs.readFileSync(path.join(__dirname, './results.json'));
+    const { results } = JSON.parse(rawJson);
     try {
         res.json({ results: results.slice(0, 10) });
     } catch (e) {
@@ -21,12 +22,12 @@ app.get('/results', (req, res) => {
 app.post('/results', (req, res) => {
     const sortedResults = req.body.results.sort((a, b) => b.score - a.score);
 
-    fs.writeFile('./results.json', JSON.stringify({ results: sortedResults}), (err) => {
+    fs.writeFile(path.join(__dirname, './results.json'), JSON.stringify({ results: sortedResults}), (err) => {
         if (err) {
             res.status(400).send('Result is not saved');
             return;
         }
-        res.send('Result is saved');
+        res.json({ results: sortedResults.slice(0, 10) });
     })
 })
 

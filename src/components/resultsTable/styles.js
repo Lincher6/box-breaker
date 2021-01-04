@@ -8,17 +8,17 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
-`
+`;
 
 export const Title = styled.h1`
   color: firebrick;
   font-family: DigitalClock, serif;
   margin-bottom: 20px;
-`
+`;
 
 export const SubText = styled.h3`
   opacity: .7;
-`
+`;
 
 export const Record = styled.div`
   display: flex;
@@ -30,12 +30,12 @@ export const Record = styled.div`
     font-size: 1.2em;
     border-bottom: 1px solid ${() => SUB};
   }
-`
+`;
 
 export const Name = styled.div`
   opacity: .8;
-`
+`;
 
 export const Score = styled.div`
   color: ${() => SECONDARY};
-`
+`;

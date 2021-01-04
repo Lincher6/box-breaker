@@ -3,31 +3,34 @@ import {Container} from "./styles";
 import {useDispatch, useSelector} from "react-redux";
 import {actions, selectors} from "store";
 import {soundManager} from "lib/soundManager";
+import {showPopUp} from "lib/utils";
 
 export const TimeEater = React.memo(({ id, ...props }) => {
-    const isPaused = useSelector(selectors.isPaused)
-    const dispatch = useDispatch()
+    const $field = useSelector(selectors.$field);
+    const isPaused = useSelector(selectors.isPaused);
+    const dispatch = useDispatch();
 
-    const element = useRef()
+    const element = useRef();
 
-    const timeDown = useCallback(() => {
-        dispatch(actions.subtractTime(5000))
-        dispatch(actions.removeElement(id))
-        soundManager.playTimeDown()
-    }, [])
+    const timeDown = useCallback((event) => {
+        showPopUp({ event, $field, text: '-5sec' });
+        dispatch(actions.subtractTime(5000));
+        dispatch(actions.removeElement(id));
+        soundManager.playTimeDown();
+    }, []);
 
     useEffect(() => {
         if (isPaused) {
-            element.current.classList.add('stop')
+            element.current.classList.add('stop');
         } else {
-            element.current.classList.remove('stop')
+            element.current.classList.remove('stop');
         }
-    }, [isPaused])
+    }, [isPaused]);
 
     const handleClick = () => {
-        dispatch(actions.addScore(2))
-        dispatch(actions.removeElement(id))
-    }
+        dispatch(actions.addScore(2));
+        dispatch(actions.removeElement(id));
+    };
 
     return (
         <Container
@@ -37,5 +40,5 @@ export const TimeEater = React.memo(({ id, ...props }) => {
             data-type="timeEaters"
             {...props}
         />
-    )
-})
+    );
+});

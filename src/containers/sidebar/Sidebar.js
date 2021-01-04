@@ -7,11 +7,11 @@ export const Sidebar = ({children}) => {
 
     const toggle = () => {
         if (open) {
-            ref.current.style.right = -1000 + 'px'
+            ref.current.classList.remove('show')
             setOpen(!open)
         }
         else {
-            ref.current.style.right = 0
+            ref.current.classList.add('show')
             setOpen(!open)
         }
     }

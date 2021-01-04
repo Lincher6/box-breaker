@@ -1,15 +1,12 @@
 import styled from 'styled-components/macro'
-import ufoImg from 'assets/UFO.png'
 
 const width = window.innerWidth
 
-export const Container = styled.div`
+export const Container = styled.img`
    position: absolute;
    top: 100px;
    width: 70px;
-   height: 45px;
-   background: url(${ufoImg});
-   background-size: cover;
+   height: 50px;
    filter: hue-rotate(0);
    animation: ufo 2s infinite linear, fly 15s;
    z-index: 3;

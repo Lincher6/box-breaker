@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {GameField, GameUI, ResultsTable, Title, GameOverDialog} from "components";
 import {GameWindow, Sidebar} from "containers";
 
