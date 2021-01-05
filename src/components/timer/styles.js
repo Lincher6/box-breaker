@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import {SUB} from "lib/constants";
+import {SECONDARY, SUB} from "lib/constants";
 
 export const Container = styled.input`
   outline: none;
@@ -20,4 +20,5 @@ export const Container = styled.input`
   color: white;
   font-variant-numeric: lining-nums;
   overflow: hidden;
+  border: ${({ active }) => active && `2px groove ${SECONDARY}`};
 `;

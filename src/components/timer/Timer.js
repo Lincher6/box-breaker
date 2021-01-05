@@ -7,6 +7,7 @@ export const Timer = () => {
     const [value, setValue] = useState('');
     const time = useSelector(selectors.time);
     const isPaused = useSelector(selectors.isPaused);
+    const {active} = useSelector(selectors.gameStatus);
     const dispatch = useDispatch();
     const minutes = time.getMinutes();
     const seconds = time.getSeconds();
@@ -51,7 +52,8 @@ export const Timer = () => {
             onChange={event => setValue(event.target.value)}
             onBlur={validateInput}
             onKeyDown={handleKeyDown}
-            disabled={!isPaused}
+            disabled={!isPaused || !active}
+            active={isPaused && active}
         />
     )
 }

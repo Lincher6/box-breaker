@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react'
-import {Container} from "./styles";
+import {Container, PauseScreen, PauseText} from "./styles";
 import {getComponent, getIdGenerator, getOffset, showPopUp} from "lib/utils";
 import {useDispatch, useSelector} from "react-redux";
 import {actions, selectors} from "store";
@@ -86,6 +86,13 @@ export const GameField = () => {
                     />
                 )
             })}
+
+            {
+                isPaused && gameStatus.active &&
+                <PauseScreen>
+                    <PauseText>PAUSED</PauseText>
+                </PauseScreen>
+            }
         </Container>
     )
 };

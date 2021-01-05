@@ -1,6 +1,7 @@
 # BOX BREAKER
 ![alt-текст](./src/assets/logo.png "Текст заголовка логотипа 1")  
-Simple clicker game, hit as many boxes as you can during one minute.  
+<span style="color:blue">Simple clicker game, hit as many boxes as you can during one minute.</span>  
+Start command - npm start  
 Controls:  
 * L-Click - destroy box
 * "NEW GAME"/"RESTART" button  
