@@ -11,11 +11,6 @@ export const Ufo = React.memo(({id, ...props}) => {
 
     const element = useRef();
 
-    const handleClick = () => {
-        dispatch(actions.addScore(10));
-        dispatch(removeElement(id));
-    }
-
     const handleRemove = () => {
         dispatch(removeElement(id));
     }
@@ -35,8 +30,8 @@ export const Ufo = React.memo(({id, ...props}) => {
             onAnimationEnd={handleRemove}
             ref={element}
             {...props}
-            onClick={handleClick}
             data-type="ufo"
+            data-id={id}
         />
     );
 });

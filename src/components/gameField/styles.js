@@ -13,6 +13,10 @@ export const Container = styled.div`
   pointer-events: ${({active}) => active ? 'auto' : 'none'};
   background-color: #0e1621;
   opacity: ${({isPaused}) => isPaused ? .5 : 1};
+  
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const PauseScreen = styled.div`

@@ -1,5 +1,4 @@
 import {BOX_SIZE} from "./constants";
-import {TimeEater, Box, ArmoredBlock, Ufo} from "components";
 
 export const getIdGenerator = (prefix = "id-") => {
     let id = 0;
@@ -12,18 +11,6 @@ export const getIdGenerator = (prefix = "id-") => {
 export const getOffset = size => {
     const rawOffset = Math.abs(Math.floor(Math.random() * size) - BOX_SIZE);
     return rawOffset - (rawOffset % BOX_SIZE);
-};
-
-export const getComponent = () => {
-    const selector = Math.floor(Math.random() * 25);
-    if (selector < 1) {
-        return Ufo;
-    } else if (selector < 4) {
-        return TimeEater;
-    } else if (selector < 7) {
-        return ArmoredBlock;
-    }
-    return Box;
 };
 
 export const debounce = (fn, delay) => {
@@ -64,3 +51,7 @@ export const showPopUp = ({ event, $field, text, color = 'red' }) => {
         $field.removeChild($popUp);
     }, 3000);
 };
+
+export const random = maxValue => {
+    return Math.floor(Math.random() * maxValue);
+}

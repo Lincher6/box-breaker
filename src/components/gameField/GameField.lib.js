@@ -1,4 +1,17 @@
 import {soundManager} from "lib/soundManager";
+import {ArmoredBlock, Box, TimeEater, Ufo} from "components";
+
+export const getComponent = () => {
+    const selector = Math.floor(Math.random() * 25);
+    if (selector < 1) {
+        return {Component: Ufo, elementsToCreate: 1, points: 10};
+    } else if (selector < 4) {
+        return {Component: TimeEater, elementsToCreate: 2, points: 2};
+    } else if (selector < 7) {
+        return {Component: ArmoredBlock, elementsToCreate: 4, points: 5};
+    }
+    return {Component: Box, elementsToCreate: Math.floor(Math.random() * 5), points: 1};
+};
 
 export function flash({ event, $field }) {
     const $flash = document.createElement('div');
@@ -11,16 +24,6 @@ export function flash({ event, $field }) {
     setTimeout(() => {
         $field.removeChild($flash);
     }, 1000);
-}
-
-export const checkHitBox = type => {
-    switch (type) {
-        case 'boxes': return {elementsToCreate: Math.floor(Math.random() * 5), points: 1};
-        case 'timeEaters': return {elementsToCreate: 2, points: 2};
-        case 'armor-0': return {elementsToCreate: 4, points: 5};
-        case 'ufo': return {elementsToCreate: 1, points: 10};
-        default: soundManager.playMiss();
-    }
 }
 
 export const checkPosition = (positions, {top,left}) => {

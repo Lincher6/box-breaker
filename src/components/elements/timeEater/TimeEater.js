@@ -27,17 +27,12 @@ export const TimeEater = React.memo(({ id, ...props }) => {
         }
     }, [isPaused]);
 
-    const handleClick = () => {
-        dispatch(actions.addScore(2));
-        dispatch(actions.removeElement(id));
-    };
-
     return (
         <Container
             onAnimationEnd={timeDown}
             ref={element}
-            onClick={handleClick}
             data-type="timeEaters"
+            data-id={id}
             {...props}
         />
     );

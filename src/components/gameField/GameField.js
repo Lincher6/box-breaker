@@ -1,10 +1,12 @@
 import React, {useEffect, useRef} from 'react'
 import {Container, PauseScreen, PauseText} from "./styles";
-import {getComponent, getIdGenerator, getOffset, showPopUp} from "lib/utils";
+import {getIdGenerator, getOffset, showPopUp} from "lib/utils";
 import {useDispatch, useSelector} from "react-redux";
 import {actions, selectors} from "store";
-import {flash, checkHitBox, checkPosition} from "./GameField.lib";
+import {flash, checkPosition, getComponent} from "./GameField.lib";
 import {SECONDARY} from "lib/constants";
+import {removeElement} from "store/actions";
+import {soundManager} from "lib/soundManager";
 
 const nextId = getIdGenerator();
 
@@ -20,12 +22,17 @@ export const GameField = () => {
     const positions = useRef([]);
 
     const handleShot = event => {
-        const {type} = event.target.dataset;
-        const data = checkHitBox(type);
-        if (data) {
-            createElements(data.elementsToCreate);
+        const {type, id} = event.target.dataset;
+        if (type) {
+            const element = elements.find(el => el.id === id);
+            const {elementsToCreate, points} = element;
+            dispatch(actions.addScore(points));
+            dispatch(removeElement(id));
+            createElements(elementsToCreate);
             flash({event, $field});
-            showPopUp({ event, $field, text: `+${data.points}`, color: SECONDARY });
+            showPopUp({ event, $field, text: `+${points}`, color: SECONDARY });
+        } else {
+            soundManager.playMiss();
         }
     }
 
@@ -39,8 +46,8 @@ export const GameField = () => {
             }
             positions.current.push({top, left});
             dispatch(actions.addElement({
+                ...getComponent(),
                 id: nextId(),
-                Component: getComponent(),
                 top,
                 left
             }));
@@ -58,6 +65,7 @@ export const GameField = () => {
             timer.current = setInterval(() => {
                 createElements(1);
             }, 3000);
+            fieldRef.current.focus();
         }
     }, [isPaused]);
 
@@ -72,7 +80,7 @@ export const GameField = () => {
     return (
         <Container
             ref={fieldRef}
-            onClick={handleShot}
+            onMouseDown={handleShot}
             active={gameStatus.active && !isPaused}
             isPaused={isPaused && gameStatus.active}
         >
@@ -80,9 +88,7 @@ export const GameField = () => {
                 return (
                     <Component
                         key={data.id}
-                        id={data.id}
-                        top={data.top}
-                        left={data.left}
+                        {...data}
                     />
                 )
             })}
