@@ -5,7 +5,6 @@ const serveStatic = require('serve-static');
 const { mongooseErrorHandler, renderReactApp } = require('./lib/middlewares');
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
-const path = require('path');
 
 const app = express();
 const port = process.env.PORT || config.PORT;
