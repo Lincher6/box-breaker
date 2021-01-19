@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.js": "./static/js/main.bf154040.chunk.js",
+    "main.js.map": "./static/js/main.bf154040.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.f116c4b0.js",
+    "runtime-main.js.map": "./static/js/runtime-main.f116c4b0.js.map",
+    "static/js/2.8d94cb76.chunk.js": "./static/js/2.8d94cb76.chunk.js",
+    "static/js/2.8d94cb76.chunk.js.map": "./static/js/2.8d94cb76.chunk.js.map",
+    "index.html": "./index.html",
+    "static/js/2.8d94cb76.chunk.js.LICENSE.txt": "./static/js/2.8d94cb76.chunk.js.LICENSE.txt",
+    "static/media/404.2a1e5eac.png": "./static/media/404.2a1e5eac.png",
+    "static/media/UFO.d1670d79.png": "./static/media/UFO.d1670d79.png",
+    "static/media/armorHit.e10f8304.wav": "./static/media/armorHit.e10f8304.wav",
+    "static/media/armoredBox.fd93198c.png": "./static/media/armoredBox.fd93198c.png",
+    "static/media/digital-7.ae951a18.ttf": "./static/media/digital-7.ae951a18.ttf",
+    "static/media/logo.6a96b6a5.png": "./static/media/logo.6a96b6a5.png",
+    "static/media/miss.30a7cf16.wav": "./static/media/miss.30a7cf16.wav",
+    "static/media/shot.ee66b61c.wav": "./static/media/shot.ee66b61c.wav",
+    "static/media/timeDown.7e040914.wav": "./static/media/timeDown.7e040914.wav"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f116c4b0.js",
+    "static/js/2.8d94cb76.chunk.js",
+    "static/js/main.bf154040.chunk.js"
+  ]
+}
