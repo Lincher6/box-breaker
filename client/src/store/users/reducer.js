@@ -4,7 +4,7 @@ const initialState = {
     user: {},
     users: [],
     page: 1,
-    pageSize: 1,
+    pageSize: 5,
     totalUserCount: 1,
     search: '',
     sortParams: { hiScore: 1 }
@@ -62,7 +62,7 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 users: [],
                 page: 1,
-                pageSize: 1,
+                pageSize: 5,
                 totalUserCount: 1,
                 search: '',
                 sortParams: { hiScore: 1 }
