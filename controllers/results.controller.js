@@ -12,13 +12,18 @@ exports.getResults = async function (req, res, next) {
 
 exports.saveResult = async function (req, res, next) {
     try {
-        const { name, score, newHiScore } = req.body;
+        const { name, score } = req.body;
         await ResultServices.saveResult({ name, score });
-        if (newHiScore) {
-            await UserServices.updateUser({ name }, { hiScore: newHiScore });
-        }
+
+        const userResults = await ResultServices.getUserResults(name);
+        const hiScore = userResults.reduce((max, result) => {
+            max = max > result.score ? max : result.score;
+            return max;
+        }, score)
+
+        await UserServices.updateUser({ name }, { hiScore, $inc: { gamesPlayed: 1} });
         const results = await ResultServices.getResults();
-        return res.status(200).json({ results });
+        return res.status(200).json({ results, hiScore });
     } catch (error) {
         next(error);
     }

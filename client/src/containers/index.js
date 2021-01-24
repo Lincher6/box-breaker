@@ -1,4 +1,3 @@
-export {Sidebar} from './sidebar/Sidebar'
-export {GameWindow} from './gameWindow/GameWindow'
-export {AuthRoute} from './AuthRoute'
-export {ProtectedRoute} from './ProtectedRoute'
+export { Sidebar } from './Sidebar';
+export { GameWindow } from './GameWindow';
+export { Layout } from './Layout';

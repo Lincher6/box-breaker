@@ -26,8 +26,16 @@ export const theme = createMuiTheme({
                 fontWeight: `bold`,
                 margin: `10px`,
                 fontFamily: `DigitalClock, serif`,
-                fontSize: 24,
+                fontSize: '1.5rem',
                 minWidth: 130,
+                disabled: {
+                    opacity: .6
+                },
+                ['@media(max-width: 1000px)']: {
+                    padding: '0 10px',
+                    minWidth: 0
+                }
+
             },
             sizeSmall: {
                 minWidth: "initial",
@@ -38,6 +46,11 @@ export const theme = createMuiTheme({
         MuiTextField: {
             root: {
                 marginBottom: 20
+            }
+        },
+        MuiDialogTitle: {
+            root: {
+                textAlign: 'center'
             }
         }
     }

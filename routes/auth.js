@@ -1,17 +1,14 @@
-const { protectedRoute } = require("../lib/middlewares");
+const { protectedRoute, adminRoute } = require("../lib/middlewares");
 const { Router } = require('express');
 const UserController = require('../controllers/user.controller');
 
 const router = Router();
 
 router.get('/user', protectedRoute, UserController.getUser);
+router.patch('/user', protectedRoute, UserController.updateUser);
+router.get('/users', adminRoute, UserController.getUsers);
 
 router.post('/login', UserController.login);
-
-router.post('/logout', (req, res) => {
-    res.clearCookie('userId').redirect('/');
-    res.status(200).json({ message: 'logged out successfully' })
-})
 
 router.post('/registration', UserController.createUser);
 

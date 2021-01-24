@@ -1,4 +1,5 @@
-import {createGlobalStyle} from 'styled-components';
+import styled from 'styled-components/macro';
+import { createGlobalStyle } from 'styled-components';
 import digitalClockFont from './assets/fonts/digital-7.ttf';
 
 const GlobalStyle = createGlobalStyle`
@@ -12,11 +13,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
     user-select: none;
   }
 
@@ -31,29 +31,26 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  @media(max-width: 1000px) {
+    html {
+      font-size: 12px;
+    }
+  }
     
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+ 
   
   a {
     text-decoration: none;
     color: initial;
   }
-    
-  .app {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    padding: 0;
-    overflow: hidden;
-  }
   
-  .app.column {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+  i {
+  margin: 20px;
   }
     
   .flash {
@@ -80,8 +77,9 @@ const GlobalStyle = createGlobalStyle`
     position: absolute;
   }
   
-  .smallButton {
-    
+  .disabled {
+    pointer-events: none;
+    opacity: .4;
   }
   
   @keyframes pointsPopUp {
@@ -93,6 +91,36 @@ const GlobalStyle = createGlobalStyle`
     0% {transform: scale(0, 0); opacity: 1}
     100% {transform: scale(1, 1); opacity: 0}
   }
+  
+  @keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+
+  @keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+  }
+  
+  @keyframes appear {
+    0% {opacity: 0; transform: translate(0, 30px)}
+    100% {opacity: 1; transform: translate(0, 0)}
+  }
 `;
+
+export const Span = styled.span`
+  color: ${({ color }) => color};
+  margin: 0 5px;
+  font-weight: ${({ weight }) => weight};
+`
+
+export const Column = styled.span`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 export default GlobalStyle;

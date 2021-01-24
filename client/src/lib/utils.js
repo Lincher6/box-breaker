@@ -1,5 +1,22 @@
 import {BOX_SIZE} from "./constants";
 
+export const wait = delay => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve('finished');
+        }, [delay * 1000])
+    })
+}
+
+export const createError = error => {
+    return {
+        error: {
+            type: error.message,
+            message: error.response?.data?.message || 'unknown error'
+        }
+    }
+}
+
 export const getIdGenerator = (prefix = "id-") => {
     let id = 0;
 

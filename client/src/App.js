@@ -1,28 +1,37 @@
-import React, {useEffect, useState} from 'react';
-import {GamePage, LoginPage, Page404, RegistrationPage} from "pages";
+import React, { useLayoutEffect } from 'react';
+import { AdminPage, GamePage, LoginPage, Page404, RegistrationPage} from "pages";
 import { Switch, Route } from 'react-router-dom';
-import {AuthRoute, ProtectedRoute} from "./containers";
-import {LoadingOverlay} from "./components";
-import {useUser} from "./lib/hooks/useUser";
-import {useDispatch} from "react-redux";
-import {actions} from "./store";
+import { AdminRoute, AuthRoute, ProtectedRoute } from "components/common";
+import { useToken } from "./lib/hooks/useToken";
+import { useDispatch } from "react-redux";
+import { appActions } from "store/app";
+import { LoadingOverlay } from "components/common";
+import { useError } from './lib/hooks/useError';
 
 export function App() {
     const dispatch = useDispatch();
-    const userId = useUser();
+    const user = useToken();
+    const { errorModal } = useError();
 
-    useEffect(async () => {
-        dispatch(actions.initializeApp(userId))
+    useLayoutEffect(() => {
+        if (user) {
+            const init = async () => {
+                dispatch(appActions.initializeApp());
+            }
+            init();
+        }
     }, [])
 
     return (
         <>
-            <LoadingOverlay/>
+            {errorModal}
+            {<LoadingOverlay user={user}/>}
             <Switch>
                 <ProtectedRoute exact path='/' component={GamePage}/>
                 <AuthRoute exact path='/login' component={LoginPage}/>
                 <AuthRoute exact path='/registration' component={RegistrationPage}/>
-                <Route exact path='*' component={Page404}/>
+                <AdminRoute exact path='/admin' component={AdminPage}/>
+                <Route path='*' component={Page404}/>
             </Switch>
         </>
 
