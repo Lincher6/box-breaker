@@ -1,18 +1,18 @@
 import {MINUTE} from "lib/constants";
 import {
     ADD_ELEMENT,
-    ADD_SCORE,
+    ADD_SCORE, CLEAR_GAME,
     CLOSE_DIALOG,
     COUNTDOWN,
-    PAUSE_GAME,
-    REMOVE_ELEMENT, SET_FIELD, SET_LOADING, SET_RESULTS, SET_TIME, SET_USER,
+    PAUSE_GAME, REMOVE_ELEMENT,
+    SET_FIELD,
+    SET_RESULTS,
+    SET_TIME,
     START_GAME,
-    SUBTRACT_TIME, UPDATE_USER
+    SUBTRACT_TIME
 } from "./types";
 
 const initialState = {
-    loading: false,
-    user: {},
     $field: null,
     score: 0,
     results: [],
@@ -25,27 +25,6 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_LOADING: {
-            return {
-                ...state,
-                loading: action.payload
-            };
-        }
-
-        case SET_USER: {
-            return {
-                ...state,
-                user: action.payload
-            };
-        }
-
-        case UPDATE_USER: {
-            return {
-                ...state,
-                user: { ...state.user, ...action.payload }
-            };
-        }
-
         case ADD_ELEMENT: {
             return {
                 ...state,
@@ -120,9 +99,14 @@ export const reducer = (state = initialState, action) => {
         }
 
         case SET_RESULTS: {
-            return { ...state,
-                results: action.payload.results,
+            return {
+                ...state,
+                results: action.payload,
             };
+        }
+
+        case CLEAR_GAME: {
+            return initialState;
         }
 
         default: return state;

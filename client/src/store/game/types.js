@@ -1,9 +1,6 @@
-export const SET_LOADING = "SET_LOADING";
-export const SET_USER = "SET_USER";
-export const UPDATE_USER = "UPDATE_USER"
 export const ADD_ELEMENT = "ADD_ELEMENT";
-export const ADD_SCORE = "ADD_SCORE";
 export const REMOVE_ELEMENT = "REMOVE_ELEMENT";
+export const ADD_SCORE = "ADD_SCORE";
 export const START_GAME = "START_GAME";
 export const PAUSE_GAME = "PAUSE_GAME";
 export const COUNTDOWN = "COUNTDOWN";
@@ -12,3 +9,4 @@ export const SUBTRACT_TIME = "SUBTRACT_TIME";
 export const SET_TIME = "SET_TIME";
 export const SET_FIELD = "SET_FIELD";
 export const SET_RESULTS = "SET_RESULTS";
+export const CLEAR_GAME = "CLEAR_GAME";

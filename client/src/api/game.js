@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { createError } from 'lib/utils';
 
-axios.defaults.baseURL = 'http://localhost:3000'
-
 export const gameApi = {
     getResults: async () => {
         try {
