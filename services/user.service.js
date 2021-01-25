@@ -13,7 +13,8 @@ exports.getUsers = function ({ pageSize = 10, page = 1, searchString = '', sortP
 }
 
 exports.getTotalUserCount = function (searchString = '') {
-    return User.countDocuments({ name: RegExp(searchString) });
+    const regex = new RegExp(searchString);
+    return User.countDocuments({ $or: [{ login: regex }, { name: regex }, { userIp: regex } ] });
 }
 
 exports.createUser = function (body) {
