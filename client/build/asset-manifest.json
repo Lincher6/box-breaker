@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "./static/js/main.df875c4c.chunk.js",
-    "main.js.map": "./static/js/main.df875c4c.chunk.js.map",
+    "main.js": "./static/js/main.de68535d.chunk.js",
+    "main.js.map": "./static/js/main.de68535d.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.12adb631.js",
     "runtime-main.js.map": "./static/js/runtime-main.12adb631.js.map",
-    "static/js/2.93d7a914.chunk.js": "./static/js/2.93d7a914.chunk.js",
-    "static/js/2.93d7a914.chunk.js.map": "./static/js/2.93d7a914.chunk.js.map",
+    "static/js/2.144126b9.chunk.js": "./static/js/2.144126b9.chunk.js",
+    "static/js/2.144126b9.chunk.js.map": "./static/js/2.144126b9.chunk.js.map",
     "index.html": "./index.html",
-    "static/js/2.93d7a914.chunk.js.LICENSE.txt": "./static/js/2.93d7a914.chunk.js.LICENSE.txt",
+    "static/js/2.144126b9.chunk.js.LICENSE.txt": "./static/js/2.144126b9.chunk.js.LICENSE.txt",
     "static/media/404.2a1e5eac.png": "./static/media/404.2a1e5eac.png",
     "static/media/UFO.d1670d79.png": "./static/media/UFO.d1670d79.png",
     "static/media/armorHit.e10f8304.wav": "./static/media/armorHit.e10f8304.wav",
@@ -21,7 +21,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.12adb631.js",
-    "static/js/2.93d7a914.chunk.js",
-    "static/js/main.df875c4c.chunk.js"
+    "static/js/2.144126b9.chunk.js",
+    "static/js/main.de68535d.chunk.js"
   ]
 }

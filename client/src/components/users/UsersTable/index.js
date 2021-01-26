@@ -6,14 +6,12 @@ import { RoleSelect } from './RoleSelect';
 import { Category } from './Category';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Span } from 'globalStyles';
 
 export const UsersTable = () => {
     const [loading, setLoading] = useState(false);
-    const page = useSelector(usersSelectors.page);
-    const sortParams = useSelector(usersSelectors.sortParams);
-    const search = useSelector(usersSelectors.search);
+    const tableParams = useSelector(usersSelectors.tableParams);
     const currentUser = useSelector(usersSelectors.user);
     const users = useSelector(usersSelectors.users);
     const dispatch = useDispatch();
@@ -22,7 +20,7 @@ export const UsersTable = () => {
         setLoading(true);
         await dispatch(usersActions.getUsers());
         setLoading(false);
-    }, [page, sortParams, search]);
+    }, [tableParams]);
 
     return (
         <Container>
